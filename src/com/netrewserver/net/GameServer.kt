@@ -1,9 +1,9 @@
-package com.netrewserver
+package com.netrewserver.net
 
 import com.esotericsoftware.kryonet.Connection
 import com.esotericsoftware.kryonet.Listener
 import com.esotericsoftware.kryonet.Server
-import com.netrewserver.requests.SomeRequest
+import com.netrewserver.net.requests.SomeRequest
 
 class GameServer : Listener() {
     val server = Server()
@@ -12,6 +12,7 @@ class GameServer : Listener() {
         server.kryo.register(SomeRequest::class.java)
         server.start()
         server.bind(13370, 13371)
+        server.addListener(this)
     }
 
     override fun connected(connection: Connection) {
